@@ -5,9 +5,9 @@ const NavBar = () => {
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar
-                translucent={false} // Do not allow the background to extend into the status bar
-                backgroundColor="#f9f9f9" // Matches navigation bar background color
-                barStyle="dark-content" // Dark icons/text
+                translucent={false}
+                backgroundColor="#f9f9f9"
+                barStyle="dark-content"
             />
             <View style={styles.navbar}>
                 <View style={styles.buttonLeft}>
@@ -29,7 +29,8 @@ const NavBar = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'black', // Matches navbar and app's main background
+        justifyContent: 'flex-start',
+        backgroundColor: 'black',
     },
     navbar: {
         flexDirection: 'row',
@@ -37,20 +38,22 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#f9f9f9',
         height: 80,
-        borderRadius: 2,
+        borderRadius: 10,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.1, // Reduce shadow intensity for a cleaner look
-        shadowRadius: 3,
-        elevation: 5,
+        shadowOpacity: 0.1,
+        shadowRadius: 10,
+        elevation: 20,
         borderBottomWidth: 1,
         borderBottomColor: '#e0e0e0',
-        paddingHorizontal: 20,
+        paddingHorizontal: 10,
     },
     title: {
+
         fontSize: 24,
+        fontWeight: 'bold',
         textAlign: 'center',
-        flex: 1, // Centers the title while allowing left/right buttons
+        flex: 1,
     },
     buttonLeft: {
         justifyContent: 'center',
