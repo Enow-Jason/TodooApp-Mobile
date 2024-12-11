@@ -3,13 +3,10 @@ import { StyleSheet, View, Text, FlatList, TouchableOpacity } from 'react-native
 
 const App = () => {
     const tasks = [
-        { id: '1', task: 'Task 1', due: '2024-12-10' },
-        { id: '2', task: 'Task 2', due: '2024-12-12' },
-        { id: '3', task: 'Task 3', due: '2024-12-15' },
-        { id: '4', task: 'Task 4', due: '2024-12-15' },
-        { id: '5', task: 'Task 5', due: '2024-12-15' },
-        { id: '6', task: 'Task 6', due: '2024-12-15' },
-        { id: '7', task: 'Task 7', due: '2024-12-15' }
+        { id: '1', task: 'Pay Rent', due: '2024-12-10' },
+        { id: '2', task: 'Replace Tires', due: '2024-12-12' },
+        { id: '3', task: 'Math Homework', due: '2024-12-13' },
+        { id: '4', task: 'Get a New Haircut', due: '2024-12-14' },
     ];
 
     const renderTask = ({ item }) => (
@@ -61,7 +58,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingHorizontal: 20,
-        marginTop: 50,
+        marginTop: 5,
         marginBottom: 20,
         width: '100%',
     },
