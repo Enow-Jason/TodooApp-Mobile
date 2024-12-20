@@ -1,19 +1,20 @@
-import React from 'react';
+import React, {useContext, useState} from 'react';
 import { StyleSheet, View, Text, FlatList, TouchableOpacity } from 'react-native';
+import {TodoListContext} from "../Context/TodoListContext";
 
-const App = () => {
-    const tasks = [
-        { id: '1', task: 'Pay Rent', due: '2024-12-10' },
-        { id: '2', task: 'Replace Tires', due: '2024-12-12' },
-        { id: '3', task: 'Math Homework', due: '2024-12-13' },
-        { id: '4', task: 'Get a New Haircut', due: '2024-12-14' },
-    ];
+const TodoList = () => {
+    const [todo, setTodo] = useState('')
+    const {todos, dispatch } = useContext(TodoListContext);
 
     const renderTask = ({ item }) => (
         <View style={styles.row}>
             <Text style={styles.taskText}>{item.task}</Text>
             <Text style={styles.dueText}>{item.due}</Text>
-            <TouchableOpacity style={styles.markDoneButton}>
+            <TouchableOpacity
+                onPress={() => dispatch({ type: 'MARK_DONE', payload: item.id })}
+                style={styles.markDoneButton}
+                accessible={true}
+                accessibilityLabel="Mark task as done">
                 <Text style={styles.markDoneText}>Done</Text>
             </TouchableOpacity>
         </View>
@@ -24,9 +25,8 @@ const App = () => {
             {/* Header with "Due Soon" and "Filter" */}
             <View style={styles.headerContainer}>
                 <Text style={styles.dueSoonText}>Due Soon</Text>
-                <Text style={styles.filterText}>Filter</Text>
+                <Text style={styles.filterText}>Filter By Category:</Text>
             </View>
-
             {/* Card with tasks */}
             <View style={styles.container}>
                 <View style={styles.card}>
@@ -35,12 +35,18 @@ const App = () => {
                         <Text style={styles.headerText}>Due</Text>
                         <Text style={styles.headerText}>Mark Done</Text>
                     </View>
-                    <FlatList
-                        data={tasks}
-                        keyExtractor={(item) => item.id}
-                        renderItem={renderTask}
-                        contentContainerStyle={styles.list}
-                    />
+                    {todos.length > 0 ? (
+                        <FlatList
+                            data={todos}
+                            keyExtractor={(item) => item.id}
+                            renderItem={renderTask}
+                            contentContainerStyle={styles.list}
+                        />
+                    ):(
+                        <View>
+                            <Text>No tasks to display</Text>
+                        </View>
+                    )}
                 </View>
             </View>
         </View>
@@ -63,13 +69,14 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     dueSoonText: {
-        fontSize: 18,
+        fontSize: 17,
         color: 'Grey',
+        fontWeight: "bold",
         textAlign: 'left',
         paddingVertical: 10,
     },
     filterText: {
-        fontSize: 18,
+        fontSize: 17,
         color: 'Grey',
         textAlign: 'right',
         paddingVertical: 10,
@@ -141,4 +148,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default App;
+export default TodoList;
