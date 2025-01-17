@@ -11,11 +11,9 @@ import {
     TextInput
 } from "react-native";
 import {TodoListContext} from "../Context/TodoListContext";
+import NavModals from "../Screens/NavModals";
 
 const NavBar = () => {
-    const [todo, setTodo] = useState('')
-    const { dispatch } = useContext(TodoListContext);
-    const [dueDate, setDueDate] = useState('')
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isAddMoreButtonOpen, setIsAddMoreOpen] = useState(false);
 
@@ -25,20 +23,6 @@ const NavBar = () => {
 
     const toggleAddMore = () => {
         setIsAddMoreOpen((prev) => !prev); // Toggle the state
-    };
-
-    const addTodo = () => {
-        if (todo) {
-            dispatch({
-                type: 'ADD_TODO',
-                task: todo,
-                due: dueDate, // Assuming due date is formatted correctly
-                priority: 'normal', // Default priority, adjust as needed
-            });
-            setTodo('');
-            setDueDate('');
-            toggleAddMore(); // Close the modal after adding
-        }
     };
 
     return (
@@ -65,45 +49,12 @@ const NavBar = () => {
                     </View>
                 </TouchableOpacity>
             </View>
-
-            {/* Modal for the Add More functionality */}
-            <Modal
-                animationType="fade"
-                transparent={true}
-                visible={isAddMoreButtonOpen}
-                onRequestClose={() => {
-                    setIsAddMoreOpen(false);
-                }}
-            >
-                <View style={styles.centeredView}>
-                    <View style={styles.modalView}>
-                        <Text style={styles.modalText}>Add More Tasks</Text>
-                        <TextInput
-                            placeholder="Enter Task"
-                            value={todo}
-                            onChangeText={setTodo}
-                        />
-                        <TextInput
-                            placeholder="Enter Due Date(YYYY/MM/DD)"
-                            value={dueDate}
-                            onChangeText={setDueDate}
-                        />
-                        <TouchableOpacity
-                            style={{ ...styles.openButton, backgroundColor: "green", marginBottom: 20 }}
-                            onPress={addTodo}
-                        >
-                            <Text style={styles.textStyle}>Add Task</Text>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity
-                            style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
-                            onPress={toggleAddMore}
-                        >
-                            <Text style={styles.textStyle}>Close</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-            </Modal>
+            <NavModals
+                isMenuOpen={isMenuOpen}
+                toggleMenu={toggleMenu}
+                isAddMoreButtonOpen={isAddMoreButtonOpen}
+                toggleAddMore={toggleAddMore}
+            />
         </SafeAreaView>
     );
 };
@@ -189,44 +140,6 @@ const styles = StyleSheet.create({
     },
     barBottom: {
         top: 20,
-    },
-    centeredView: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        marginTop: 22
-    },
-    modalView: {
-        margin: 20,
-        backgroundColor: "white",
-        borderRadius: 20,
-        padding: 35,
-        alignItems: "center",
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5
-    },
-    openButton: {
-        backgroundColor: "#F194FF",
-        borderRadius: 20,
-        padding: 10,
-        elevation: 2
-    },
-    textStyle: {
-        color: "white",
-        fontWeight: "bold",
-        textAlign: "center"
-    },
-    modalText: {
-        fontWeight: "bold",
-        fontSize: 25,
-        marginBottom: 15,
-        textAlign: "center"
     }
 });
 

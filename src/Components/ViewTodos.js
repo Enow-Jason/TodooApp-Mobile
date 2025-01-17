@@ -3,7 +3,6 @@ import { StyleSheet, View, Text, FlatList, TouchableOpacity } from 'react-native
 import {TodoListContext} from "../Context/TodoListContext";
 
 const TodoList = () => {
-    const [todo, setTodo] = useState('')
     const {todos, dispatch } = useContext(TodoListContext);
 
     const renderTask = ({ item }) => (
