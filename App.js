@@ -1,14 +1,10 @@
 // import { NavigationContainer } from "@react-navigation/native";
 // import { createStackNavigator } from "@react-navigation/stack";
 import { View } from 'react-native';
-import OverviewScreen from "./src/Screens/OverviewScreen";
+import AppNavigator from "./src/AppNavigator";
 
 const App = () => {
-  return (
-      <View>
-        <OverviewScreen/>
-      </View>
-  )
+    return <AppNavigator />;
 }
 
 // const styles = StyleSheet.create({

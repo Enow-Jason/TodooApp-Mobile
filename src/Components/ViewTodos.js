@@ -1,9 +1,11 @@
 import React, {useContext, useState} from 'react';
+
 import { StyleSheet, View, Text, FlatList, TouchableOpacity } from 'react-native';
 import {TodoListContext} from "../Context/TodoListContext";
 
 const TodoList = () => {
     const {todos, dispatch } = useContext(TodoListContext);
+
 
     const renderTask = ({ item }) => (
         <View style={styles.row}>

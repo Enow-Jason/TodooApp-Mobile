@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { View, Modal, TextInput, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { TodoListContext } from "../Context/TodoListContext";
 
-const NavModals = ({ isMenuOpen, toggleMenu, isAddMoreButtonOpen, toggleAddMore }) => {
+const NavModals = ({ isMenuOpen, toggleMenu, isAddMoreButtonOpen, toggleAddMore, navigation }) => {
     const [todo, setTodo] = useState('');
     const { dispatch } = useContext(TodoListContext);
     const [dueDate, setDueDate] = useState('');
@@ -27,7 +27,7 @@ const NavModals = ({ isMenuOpen, toggleMenu, isAddMoreButtonOpen, toggleAddMore 
             transparent={true}
             visible={isAddMoreButtonOpen}
             onRequestClose={() => {
-                setIsAddMoreOpen(false);
+               toggleAddMore();
             }}
         >
             <View style={styles.modalBackground}>
@@ -70,13 +70,36 @@ const NavModals = ({ isMenuOpen, toggleMenu, isAddMoreButtonOpen, toggleAddMore 
             <View style={styles.modalBackground}>
                 <View style={styles.menuContainer}>
                     <Text style={styles.menuHeader}>Menu</Text>
-                    <TouchableOpacity><Text style={styles.menuOptions}>Home</Text></TouchableOpacity>
-                    <TouchableOpacity><Text style={styles.menuOptions}>Add New Task</Text></TouchableOpacity>
+                    <TouchableOpacity onPress={() => {
+                        toggleMenu(); // Close menu first
+                        toggleAddMore();
+                    }}><Text style={styles.menuOptions}>Add New Task</Text></TouchableOpacity>
+
                     <TouchableOpacity><Text style={styles.menuOptions}>Search</Text></TouchableOpacity>
-                    <TouchableOpacity><Text style={styles.menuOptions}>Categories</Text></TouchableOpacity>
-                    <TouchableOpacity><Text style={styles.menuOptions}>Completed Tasks</Text></TouchableOpacity>
-                    <TouchableOpacity><Text style={styles.menuOptions}>Settings</Text></TouchableOpacity>
+
+                    <TouchableOpacity onPress={() => {
+                        toggleMenu();
+                        navigation.navigate('Categories');
+                    }}>
+                        <Text style={styles.menuOptions}>Categories</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity onPress={() => {
+                        toggleMenu(); // Close menu first
+                        navigation.navigate('Completed Tasks');
+                    }}>
+                    <Text style={styles.menuOptions}>Completed Tasks</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity onPress={() => {
+                        toggleMenu(); // Close menu first
+                        navigation.navigate('Settings'); // Navigate to Settings
+                    }}>
+                        <Text style={styles.menuOptions}>Settings</Text>
+                    </TouchableOpacity>
+
                     <TouchableOpacity><Text style={styles.menuOptions}>Refer a friend</Text></TouchableOpacity>
+
                     <TouchableOpacity style={styles.menuCloseButton} onPress={toggleMenu}>
                         <Text>Close</Text>
                     </TouchableOpacity>

@@ -13,7 +13,7 @@ import {
 import {TodoListContext} from "../Context/TodoListContext";
 import NavModals from "../Screens/NavModals";
 
-const NavBar = () => {
+const NavBar = ({navigation}) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isAddMoreButtonOpen, setIsAddMoreOpen] = useState(false);
 
@@ -54,6 +54,7 @@ const NavBar = () => {
                 toggleMenu={toggleMenu}
                 isAddMoreButtonOpen={isAddMoreButtonOpen}
                 toggleAddMore={toggleAddMore}
+                navigation={navigation}
             />
         </SafeAreaView>
     );

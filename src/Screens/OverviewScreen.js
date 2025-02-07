@@ -6,12 +6,12 @@ import TodoListContextProvider from "../Context/TodoListContext";
 
 
 
-const OverviewScreen = () => {
+const OverviewScreen = ({navigation}) => {
     return(
         <TodoListContextProvider>
             <View>
                 <View>
-                    <NavBar/>
+                    <NavBar navigation={navigation}/>
                 </View>
                 <View style={styles.textStyle}>
                     <ViewTodos/>

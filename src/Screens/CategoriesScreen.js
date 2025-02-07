@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-const CompletedTasks = ({route}) => {
+const CategoriesScreen = ({route}) => {
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>Completed Tasks</Text>
+            <Text style={styles.text}>Categories Screen</Text>
         </View>
     );
 };
@@ -14,4 +14,4 @@ const styles = StyleSheet.create({
     text: { fontSize: 18 },
 });
 
-export default CompletedTasks;
+export default CategoriesScreen;
